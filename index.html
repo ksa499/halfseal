@@ -7,8 +7,26 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none}
   html,body{height:100%;background:#a3a3a3;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;overflow:hidden}
-  #wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-  #stage{width:1280px;height:720px;position:relative;background:#fff;overflow:hidden;transform-origin:center center;flex:none}
+  html,body{background:#FFE4D1}
+  #wrap{position:fixed;inset:0;overflow:hidden}
+  #desk{position:absolute;left:50%;top:50%;width:1920px;height:1080px;margin:-540px 0 0 -960px;transform-origin:center center}
+  /* 픽셀 인터넷 창 */
+  #win,#winShadow{position:absolute;left:402px;top:192.5px;width:1116px;height:695px;
+    clip-path:polygon(0 12px,6px 12px,6px 6px,12px 6px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 6px,calc(100% - 6px) 6px,calc(100% - 6px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 6px) calc(100% - 12px),calc(100% - 6px) calc(100% - 6px),calc(100% - 12px) calc(100% - 6px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 6px),6px calc(100% - 6px),6px calc(100% - 12px),0 calc(100% - 12px))}
+  #winShadow{background:rgba(96,59,30,.28);transform:translate(16px,16px)}
+  #win{background:#603B1E}
+  #winIn{position:absolute;left:6px;top:6px;right:6px;bottom:6px;background:#E5BD96;
+    clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px))}
+  #titleBar{position:absolute;left:6px;top:6px;right:6px;height:56px}
+  #titleBar .wb{position:absolute;top:16px;width:24px;height:24px;box-sizing:border-box;border:4px solid #603B1E}
+  #titleBar .wb1{left:24px;background:#EE8274}#titleBar .wb2{left:60px;background:#F6CC52}#titleBar .wb3{left:96px;background:#9AD4A6}
+  #addr{position:absolute;left:150px;right:96px;top:10px;height:36px;box-sizing:border-box;background:#FFF3DF;border:4px solid #A97C52;
+    clip-path:polygon(0 6px,4px 6px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 4px) calc(100% - 6px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 6px),0 calc(100% - 6px));
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#8d6e41;letter-spacing:1px}
+  #menuIco{position:absolute;right:30px;top:17px;width:34px;height:22px}
+  #menuIco b{display:block;height:4px;background:#603B1E;margin-bottom:5px}
+  #view{position:absolute;left:6px;top:68px;width:1104px;height:621px;overflow:hidden;background:#fff}
+  #stage{width:1280px;height:720px;position:absolute;left:0;top:0;background:#fff;overflow:hidden;transform-origin:0 0;transform:scale(0.8625);flex:none}
   .scene{position:absolute;inset:0;display:none;background:#fff}
   .scene.active{display:block;animation:fade .5s}
   @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -248,7 +266,16 @@
                 </style>
 </head>
 <body>
-<div id="wrap"><div id="stage">
+<div id="wrap"><div id="desk">
+  <div id="winShadow"></div>
+  <div id="win">
+    <div id="winIn"></div>
+    <div id="titleBar">
+      <i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i>
+      <div id="addr"><span>halfseal</span></div>
+      <div id="menuIco"><b></b><b></b><b></b></div>
+    </div>
+    <div id="view"><div id="stage">
 
   <!-- 0 표지 -->
   <section class="scene" id="s0">
@@ -402,7 +429,7 @@
 
   <canvas id="iris" width="128" height="72"></canvas>
 
-</div></div>
+</div></div></div></div></div>
 
 <script>
 /* ============ 설정 ============ */
@@ -419,10 +446,16 @@ let timers = [];
 const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 const state = { done:new Set(), outfit:null };
 
+const DESK_TILE="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='226.3' height='226.3' shape-rendering='crispEdges'><rect width='226.3' height='226.3' fill='%23FFE4D1'/><rect x='113.15' width='113.15' height='113.15' fill='%23EAF9EF'/><rect y='113.15' width='113.15' height='113.15' fill='%23EAF9EF'/></svg>";
 // 스테이지 크기 맞춤
 function fit(){
-  const s = Math.min(innerWidth/1280, innerHeight/720);
-  $('#stage').style.transform = `scale(${s})`;
+  const s = Math.min(innerWidth/1920, innerHeight/1080);
+  $('#desk').style.transform = `scale(${s})`;
+  // 바탕 체크무늬: 1920x1080 바탕 파일과 같은 무늬를 창 크기에 맞춰 화면 전체에 깔기
+  const ox=(innerWidth-1920*s)/2, oy=(innerHeight-1080*s)/2, q=113.15*s;
+  document.body.style.backgroundImage=`url("${DESK_TILE}")`;
+  document.body.style.backgroundSize=`${q*2}px ${q*2}px`;
+  document.body.style.backgroundPosition=`${ox}px ${oy-25.749*s}px`;
 }
 addEventListener('resize', fit); fit();
 
