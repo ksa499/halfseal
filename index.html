@@ -10,20 +10,21 @@
   html,body{background:#FFE4D1}
   #wrap{position:fixed;inset:0;overflow:hidden}
   #desk{position:absolute;left:50%;top:50%;width:1920px;height:1080px;margin:-540px 0 0 -960px;transform-origin:center center}
-  /* 윈도우 95 스타일 인터넷 창 */
+  /* 하늘색 레트로 인터넷 창 */
   #win,#winShadow{position:absolute;left:398px;top:147.5px;width:1124px;height:713px}
-  #winShadow{background:rgba(96,59,30,.3);transform:translate(14px,14px)}
-  #win{background:#C0C0C0;box-shadow:inset -2px -2px #000,inset 2px 2px #DFDFDF,inset -4px -4px #808080,inset 4px 4px #fff;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif}
-  #titleBar{position:absolute;left:6px;top:6px;width:1112px;height:36px;background:linear-gradient(90deg,#000080,#1084D0);display:flex;align-items:center}
+  #winShadow{background:rgba(70,110,160,.28);transform:translate(14px,14px)}
+  #win{background:#CFE8FA;box-shadow:inset -2px -2px #3E6E9E,inset 2px 2px #F4FAFF,inset -4px -4px #8DBEE6,inset 4px 4px #fff;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif}
+  #titleBar{position:absolute;left:6px;top:6px;width:1112px;height:36px;background:linear-gradient(90deg,#4FA8EE,#8FD0FA);display:flex;align-items:center}
   #titleBar .ico{width:24px;height:24px;margin-left:6px;image-rendering:pixelated;flex:none}
-  #titleBar .tt{color:#fff;font-weight:700;font-size:20px;margin-left:10px;letter-spacing:.5px;white-space:nowrap}
+  #titleBar .tt{color:#fff;font-weight:700;font-size:20px;margin-left:10px;letter-spacing:.5px;white-space:nowrap;text-shadow:2px 2px 0 #2F6FB0}
   #titleBar .btns{position:absolute;right:4px;top:4px;height:28px;display:flex;gap:0}
-  #titleBar .tb{width:32px;height:28px;box-sizing:border-box;background:#C0C0C0;box-shadow:inset -2px -2px #000,inset 2px 2px #fff,inset -4px -4px #808080,inset 4px 4px #DFDFDF;display:flex;align-items:center;justify-content:center;margin-left:0}
+  #titleBar .tb{width:32px;height:28px;box-sizing:border-box;background:#DDF0FD;box-shadow:inset -2px -2px #3E6E9E,inset 2px 2px #fff,inset -4px -4px #8DBEE6,inset 4px 4px #F4FAFF;display:flex;align-items:center;justify-content:center;margin-left:0}
   #titleBar .tb2{margin-left:4px}
-  #titleBar .tb svg{display:block;shape-rendering:crispEdges}
-  #menuBar{position:absolute;left:6px;top:46px;width:1112px;height:28px;display:flex;align-items:center;font-size:19px;color:#000}
+  #titleBar .tb svg{display:block;shape-rendering:crispEdges;fill:#2F6FB0}
+  #titleBar .tb svg rect{fill:#2F6FB0}
+  #menuBar{position:absolute;left:6px;top:46px;width:1112px;height:28px;display:flex;align-items:center;font-size:19px;color:#2F5F90;font-weight:600}
   #menuBar span{padding:0 14px;line-height:28px}
-  #viewFrame{position:absolute;left:6px;top:78px;width:1112px;height:629px;background:#C0C0C0;box-shadow:inset 2px 2px #808080,inset -2px -2px #fff,inset 4px 4px #000,inset -4px -4px #DFDFDF}
+  #viewFrame{position:absolute;left:6px;top:78px;width:1112px;height:629px;background:#CFE8FA;box-shadow:inset 2px 2px #8DBEE6,inset -2px -2px #fff,inset 4px 4px #3E6E9E,inset -4px -4px #F4FAFF}
   #view{position:absolute;left:10px;top:82px;width:1104px;height:621px;overflow:hidden;background:#fff}
   #stage{width:1280px;height:720px;position:absolute;left:0;top:0;background:#fff;overflow:hidden;transform-origin:0 0;transform:scale(0.8625);flex:none}
   .scene{position:absolute;inset:0;display:none;background:#fff}
@@ -269,7 +270,7 @@
   <div id="winShadow"></div>
   <div id="win">
     <div id="titleBar">
-      <svg class="ico" viewBox="0 0 12 12" shape-rendering="crispEdges"><rect x="2" y="1" width="8" height="1" fill="#000"/><rect x="1" y="2" width="1" height="8" fill="#000"/><rect x="10" y="2" width="1" height="8" fill="#000"/><rect x="2" y="10" width="8" height="1" fill="#000"/><rect x="2" y="2" width="8" height="8" fill="#fff"/><rect x="3" y="4" width="1" height="2" fill="#000"/><rect x="8" y="4" width="1" height="2" fill="#000"/><rect x="5" y="6" width="2" height="2" fill="#000"/></svg>
+      <svg class="ico" viewBox="0 0 12 12" shape-rendering="crispEdges"><rect x="2" y="1" width="8" height="1" fill="#2F6FB0"/><rect x="1" y="2" width="1" height="8" fill="#2F6FB0"/><rect x="10" y="2" width="1" height="8" fill="#2F6FB0"/><rect x="2" y="10" width="8" height="1" fill="#2F6FB0"/><rect x="2" y="2" width="8" height="8" fill="#fff"/><rect x="3" y="4" width="1" height="2" fill="#2F6FB0"/><rect x="8" y="4" width="1" height="2" fill="#2F6FB0"/><rect x="5" y="6" width="2" height="2" fill="#2F6FB0"/></svg>
       <span class="tt">halfseal - 하프물범의 하루</span>
       <div class="btns">
         <div class="tb"><svg width="16" height="14" viewBox="0 0 8 7"><rect x="0" y="5" width="6" height="2" fill="#000"/></svg></div>
