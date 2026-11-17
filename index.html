@@ -914,7 +914,7 @@ let bgmWant=false, bgmEndT=null;
 function bgmPlay(){
   bgmWant=true; BGM.muted=SFX_MUTED;
   try{ BGM.currentTime=0; const p=BGM.play(); if(p&&p.then) p.then(()=>{ bgmWant=false; }).catch(()=>{}); }catch(e){}
-  bgmTo(0.3,1500);
+  bgmTo(0.1,1500);
   clearTimeout(bgmEndT); bgmEndT=setTimeout(()=>{ bgmTo(0,3000,()=>BGM.pause()); },12500);   // 12.5초쯤 재생된 뒤 3초에 걸쳐 서서히 사라짐
 }
 /* 브라우저 자동재생 제한 대비: 첫 터치/클릭 때 소리 재생 권한을 미리 받아 둠 + 막혔으면 다음 클릭에서 다시 시도 */
